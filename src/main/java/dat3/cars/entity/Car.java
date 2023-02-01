@@ -37,8 +37,7 @@ public class Car {
   private LocalDateTime lastEdited;
 
 
-  public Car(int id, String brand, String model, double pricePrDay, int bestDiscount) {
-    this.id = id;
+  public Car(String brand, String model, double pricePrDay, int bestDiscount) {
     this.brand = brand;
     this.model = model;
     this.pricePrDay = pricePrDay;
