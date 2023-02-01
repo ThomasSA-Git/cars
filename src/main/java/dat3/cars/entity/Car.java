@@ -1,9 +1,6 @@
 package dat3.cars.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Car {
@@ -12,18 +9,22 @@ public class Car {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   int id;
 
+  @Column(name = "car_brand", nullable = false)
   String brand;
 
+  @Column(name="car_model", nullable = false)
   String model;
 
+  @Column(name="rental_price_day")
   double pricePrDay;
 
-  double bestDiscount;
+  @Column(name="max_discount")
+  Integer bestDiscount;
 
   public Car() {
   }
 
-  public Car(int id, String brand, String model, double pricePrDay, double bestDiscount) {
+  public Car(int id, String brand, String model, double pricePrDay, Integer bestDiscount) {
     this.id = id;
     this.brand = brand;
     this.model = model;
@@ -67,7 +68,7 @@ public class Car {
     return bestDiscount;
   }
 
-  public void setBestDiscount(double bestDiscount) {
+  public void setBestDiscount(Integer bestDiscount) {
     this.bestDiscount = bestDiscount;
   }
 }

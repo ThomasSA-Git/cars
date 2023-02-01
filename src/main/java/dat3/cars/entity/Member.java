@@ -11,7 +11,7 @@ public class Member {
 
   String email;
 
-  Long password;
+  String password;
 
   String firstName;
 
@@ -23,15 +23,15 @@ public class Member {
 
   int zip;
 
-  //boolean approved;
+  boolean approved;
 
-  //ranking?
+  Integer ranking;
 
 
   public Member() {
   }
 
-  public Member(String userName, String email, Long password, String firstName, String lastName, String street, String city, int zip) {
+  public Member(String userName, String email, String password, String firstName, String lastName, String street, String city, int zip) {
     this.userName = userName;
     this.email = email;
     this.password = password;
@@ -41,6 +41,7 @@ public class Member {
     this.city = city;
     this.zip = zip;
   }
+
 
   public String getUserName() {
     return userName;
@@ -58,11 +59,11 @@ public class Member {
     this.email = email;
   }
 
-  public Long getPassword() {
+  public String getPassword() {
     return password;
   }
 
-  public void setPassword(Long password) {
+  public void setPassword(String password) {
     this.password = password;
   }
 
