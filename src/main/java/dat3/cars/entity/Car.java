@@ -1,30 +1,43 @@
 package dat3.cars.entity;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 public class Car {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  int id;
+  private int id;
 
-  @Column(name = "car_brand", nullable = false)
-  String brand;
+  @Column(name = "car_brand", length= 50, nullable = false)
+  private String brand;
 
-  @Column(name="car_model", nullable = false)
-  String model;
+  @Column(name="car_model", length= 60, nullable = false)
+  private String model;
 
   @Column(name="rental_price_day")
-  double pricePrDay;
+  private double pricePrDay;
 
   @Column(name="max_discount")
-  Integer bestDiscount;
+  private int bestDiscount;
 
-  public Car() {
-  }
+  @CreationTimestamp
+  private LocalDateTime created;
 
-  public Car(int id, String brand, String model, double pricePrDay, Integer bestDiscount) {
+  @UpdateTimestamp
+  private LocalDateTime lastEdited;
+
+
+  public Car(int id, String brand, String model, double pricePrDay, int bestDiscount) {
     this.id = id;
     this.brand = brand;
     this.model = model;
@@ -32,43 +45,4 @@ public class Car {
     this.bestDiscount = bestDiscount;
   }
 
-  public int getId() {
-    return id;
-  }
-
-  public void setId(int id) {
-    this.id = id;
-  }
-
-  public String getBrand() {
-    return brand;
-  }
-
-  public void setBrand(String brand) {
-    this.brand = brand;
-  }
-
-  public String getModel() {
-    return model;
-  }
-
-  public void setModel(String model) {
-    this.model = model;
-  }
-
-  public double getPricePrDay() {
-    return pricePrDay;
-  }
-
-  public void setPricePrDay(double pricePrDay) {
-    this.pricePrDay = pricePrDay;
-  }
-
-  public double getBestDiscount() {
-    return bestDiscount;
-  }
-
-  public void setBestDiscount(Integer bestDiscount) {
-    this.bestDiscount = bestDiscount;
-  }
 }

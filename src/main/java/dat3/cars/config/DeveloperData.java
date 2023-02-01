@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 public class DeveloperData implements ApplicationRunner {
 
   @Autowired
-  CarRepository carRepository;
+  private CarRepository carRepository;
 
   @Autowired
-  MemberRepository memberRepository;
+  private MemberRepository memberRepository;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
