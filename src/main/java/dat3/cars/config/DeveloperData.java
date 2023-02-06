@@ -9,9 +9,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,6 +41,24 @@ public class DeveloperData implements ApplicationRunner {
     Member member1 = new Member("test1", "jk@mail.com", "Kode", "John", "Doe", "Testgade 1", "Testby", "2500");
     Member member2 = new Member("test2", "jik@mail.com", "Kode", "Jimmy", "Doe", "Testgade 2", "Testby", "2600");
     Member member3 = new Member("test3", "tk@mail.com", "Kode", "Timmy", "Doe", "Testgade 3", "Testby", "2700");
+
+    //Add favourite color
+    List<String> color = new ArrayList<>();
+    color.add("green");
+    color.add("red");
+
+    member1.setFavoriteCarColors(color);
+    member2.setFavoriteCarColors(color);
+    member3.setFavoriteCarColors(color);
+
+    //Add phone number
+    Map<String, String> phones = new HashMap<>();
+    phones.put("Work", "36363636");
+    phones.put("Mobile", "58585858");
+    phones.put("Home", "75504659");
+    member1.setPhones(phones);
+    member2.setPhones(phones);
+    member3.setPhones(phones);
 
     List<Member> memberEntities = new ArrayList<Member>();
     memberEntities.add(member1);
