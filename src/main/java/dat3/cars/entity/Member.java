@@ -37,7 +37,7 @@ public class Member {
   @ElementCollection
   @MapKeyColumn(name = "Description")
   @Column(name = "phoneNumber")
-  Map<String,String> phones = new HashMap<>();
+  private Map<String,String> phones = new HashMap<>();
 
 
   private String street;

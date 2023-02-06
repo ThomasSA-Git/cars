@@ -27,8 +27,8 @@ public class MemberResponse {
 
   @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss",shape = JsonFormat.Shape.STRING)
   LocalDateTime edited;
-  int ranking;
-  boolean approved;
+  Integer ranking;
+  Boolean approved;
 
   //Convert Member Entity to Member DTO
   public MemberResponse(Member m, boolean includeAll) {
@@ -41,6 +41,7 @@ public class MemberResponse {
     this.zip = m.getZip();
     if(includeAll){
       this.created = m.getCreated();
+      this.edited = m.getLastEdited();
       this.approved = m.isApproved();
       this.ranking = m.getRanking();
     }

@@ -5,6 +5,7 @@ import dat3.cars.entity.Member;
 import dat3.cars.repositories.MemberRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,9 +17,16 @@ public class MemberService {
     this.memberRepository = memberRepository;
   }
 
-  public List<MemberResponse> getMembers() {
+  public List<MemberResponse> getMembers(boolean includeAll) {
     List<Member> members = memberRepository.findAll();
-    return null;
+/*    List<MemberResponse> memberResponses = new ArrayList<>();
+    for (Member m: members) {
+      MemberResponse mr = new MemberResponse(m, includeAll);
+      memberResponses.add(mr);
+    }*/
+    List<MemberResponse> memberResponses = members.stream().map(m->new MemberResponse(m, includeAll)).toList();
+
+    return memberResponses;
   }
 
 }
