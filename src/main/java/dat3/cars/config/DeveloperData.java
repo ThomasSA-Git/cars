@@ -15,11 +15,14 @@ import java.util.stream.Collectors;
 @Controller
 public class DeveloperData implements ApplicationRunner {
 
-  @Autowired
   private CarRepository carRepository;
 
-  @Autowired
   private MemberRepository memberRepository;
+
+  public DeveloperData(CarRepository carRepository, MemberRepository memberRepository) {
+    this.carRepository = carRepository;
+    this.memberRepository = memberRepository;
+  }
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
