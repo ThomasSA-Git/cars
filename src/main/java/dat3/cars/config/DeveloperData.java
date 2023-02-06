@@ -53,6 +53,7 @@ public class DeveloperData implements ApplicationRunner {
 
     //Add phone number
     Map<String, String> phones = new HashMap<>();
+
     phones.put("Work", "36363636");
     phones.put("Mobile", "58585858");
     phones.put("Home", "75504659");
