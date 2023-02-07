@@ -52,5 +52,4 @@ class MemberController {
   void deleteMemberByUsername(@PathVariable String username) {}
 
 
-
 }
