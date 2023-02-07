@@ -3,7 +3,6 @@ package dat3.cars.api;
 import dat3.cars.dto.CarRequest;
 import dat3.cars.dto.CarResponse;
 import dat3.cars.dto.MemberRequest;
-import dat3.cars.entity.Car;
 import dat3.cars.service.CarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/cars")
+@RequestMapping("api/cars")
 public class CarController {
 
   private CarService carService;
@@ -22,15 +21,15 @@ public class CarController {
 
   //ALL
   @GetMapping
-  public List<CarResponse> getCars(){return carService.getCars(false);}
+  List<CarResponse> getCars(){return carService.getCars(false);}
 
   //ALL
-  @GetMapping
-  public CarResponse getCarById(){return null;}
+  @GetMapping(path = "/{username}")
+  CarResponse getCarById(){return null;}
 
   //ADMIN
   @PostMapping()
-  public CarResponse addCar(@RequestBody CarRequest body){
+  CarResponse addCar(@RequestBody CarRequest body){
     return carService.addCar(body);
   }
 
@@ -46,5 +45,5 @@ public class CarController {
 
   //ADMIN
   @DeleteMapping("/{id}")
-  void deleteMemberByUsername(@PathVariable String id) {}
+  void deleteCarById(@PathVariable String id) {}
 }
