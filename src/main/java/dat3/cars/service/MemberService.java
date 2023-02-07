@@ -48,5 +48,7 @@ public class MemberService {
     return new MemberResponse(newMember, false);
   }
 
-
+  public void deleteMember(String id){
+    memberRepository.delete(memberRepository.getReferenceById(id));
+  }
 }

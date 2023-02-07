@@ -45,5 +45,5 @@ public class CarController {
 
   //ADMIN
   @DeleteMapping("/{id}")
-  void deleteCarById(@PathVariable String id) {}
+  void deleteCarById(@PathVariable int id) {}
 }

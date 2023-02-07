@@ -38,4 +38,8 @@ public class CarService {
 
     return new CarResponse(newCar, false);
   }
+
+  public void deleteCar(int id){
+    carRepository.delete(carRepository.getReferenceById(id));
+  }
 }
