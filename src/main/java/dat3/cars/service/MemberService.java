@@ -51,4 +51,8 @@ public class MemberService {
   public void deleteMember(String id){
     memberRepository.delete(memberRepository.getReferenceById(id));
   }
+  public MemberResponse findMemberByUserName(String id){
+    Member foundMember = memberRepository.findMemberByUserName(id);
+    return new MemberResponse(foundMember, false);
+  }
 }

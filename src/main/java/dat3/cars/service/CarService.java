@@ -42,4 +42,9 @@ public class CarService {
   public void deleteCar(int id){
     carRepository.delete(carRepository.getReferenceById(id));
   }
+
+  public CarResponse findCarById(int id){
+    Car foundCar = carRepository.findCarById(id);
+    return new CarResponse(foundCar, false);
+  }
 }

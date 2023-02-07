@@ -24,8 +24,8 @@ public class CarController {
   List<CarResponse> getCars(){return carService.getCars(false);}
 
   //ALL
-  @GetMapping(path = "/{username}")
-  CarResponse getCarById(){return null;}
+  @GetMapping(path = "/{id}")
+  CarResponse getCarById(@PathVariable int id){return carService.findCarById(id);}
 
   //ADMIN
   @PostMapping()
@@ -35,7 +35,7 @@ public class CarController {
 
   //MEMBER
   @PutMapping("/{id}")
-  ResponseEntity<Boolean> editCar(@RequestBody MemberRequest body, @PathVariable String id){
+  ResponseEntity<Boolean> editCar(@RequestBody MemberRequest body, @PathVariable int id){
     return null;
   }
 
