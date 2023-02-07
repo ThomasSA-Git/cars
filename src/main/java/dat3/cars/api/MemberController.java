@@ -45,7 +45,9 @@ class MemberController {
 
   //ADMIN
   @PatchMapping("/ranking/{username}/{value}")
-  void setRankingForUser(@PathVariable String username, @PathVariable int value) {}
+  void setRankingForUser(@PathVariable String username, @PathVariable int value) {
+    memberService.updateRanking(username, value);
+  }
 
   //ADMIN
   @DeleteMapping("/{username}")

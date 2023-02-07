@@ -47,4 +47,8 @@ public class CarService {
     Car foundCar = carRepository.findCarById(id);
     return new CarResponse(foundCar, false);
   }
+
+  public void updatePricePrDay(int id, double price){
+    carRepository.updatePricePrDayById(price, id);
+  }
 }

@@ -41,9 +41,13 @@ public class CarController {
 
   //ADMIN
   @PatchMapping("/pricePrDay/{id}/{value}")
-  void setPricePrDay(@PathVariable String id, @PathVariable double value) {}
+  void setPricePrDay(@PathVariable int id, @PathVariable double value) {
+    carService.updatePricePrDay(id, value);
+  }
 
   //ADMIN
   @DeleteMapping("/{id}")
-  void deleteCarById(@PathVariable int id) {}
+  void deleteCarById(@PathVariable int id) {
+    carService.deleteCar(id);
+  }
 }

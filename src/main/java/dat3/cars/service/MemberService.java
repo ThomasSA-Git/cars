@@ -6,6 +6,7 @@ import dat3.cars.entity.Member;
 import dat3.cars.repositories.MemberRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -54,5 +55,10 @@ public class MemberService {
   public MemberResponse findMemberByUserName(String id){
     Member foundMember = memberRepository.findMemberByUserName(id);
     return new MemberResponse(foundMember, false);
+  }
+
+  public void updateRanking(String userName, int ranking){
+
+    memberRepository.updateRankingByUserName(ranking, userName);
   }
 }
