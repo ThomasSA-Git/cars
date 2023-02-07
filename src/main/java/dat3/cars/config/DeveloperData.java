@@ -4,7 +4,6 @@ import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
 import dat3.cars.repositories.CarRepository;
 import dat3.cars.repositories.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
