@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 public interface MemberRepository extends JpaRepository<Member, String> {
   @Transactional
   @Modifying
@@ -17,5 +19,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
 
   Member findMemberByUserName(String userName);
 
-
+  @Override
+  Optional<Member> findById(String s);
 }

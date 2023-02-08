@@ -32,7 +32,7 @@ public class DeveloperData implements ApplicationRunner {
     Car car3 = new Car("Ford", "Mondeo", 1750, 20);
 
 
-    List<Car> carEntities = new ArrayList<Car>();
+    List<Car> carEntities = new ArrayList<>();
     carEntities.add(car1);
     carEntities.add(car2);
     carEntities.add(car3);

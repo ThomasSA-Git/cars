@@ -6,7 +6,6 @@ import dat3.cars.entity.Member;
 import dat3.cars.repositories.MemberRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -19,8 +18,6 @@ public class MemberService {
   public MemberService(MemberRepository memberRepository) {
     this.memberRepository = memberRepository;
   }
-
-
 
   public List<MemberResponse> getMembers(boolean includeAll) {
     List<Member> members = memberRepository.findAll();
@@ -52,9 +49,10 @@ public class MemberService {
   public void deleteMember(String id){
     memberRepository.delete(memberRepository.getReferenceById(id));
   }
-  public MemberResponse findMemberByUserName(String id){
-    Member foundMember = memberRepository.findMemberByUserName(id);
-    return new MemberResponse(foundMember, false);
+  public MemberResponse findMemberByUserId(String userName){
+    Member foundMember = memberRepository.findById(userName).orElseThrow( ()->new ResponseStatusException(HttpStatus.NOT_FOUND,"Member with this ID does not exist"));
+    //Member foundMember = memberRepository.findMemberByUserName(userName);
+    return new MemberResponse(foundMember, true);
   }
 
   public void updateRanking(String userName, int ranking){

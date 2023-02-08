@@ -20,14 +20,14 @@ public class MemberRequest {
   String zip;
 
   public static Member getMemberEntity(MemberRequest m){
-    return new Member(m.userName,m.getPassword(),m.getEmail(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
+    return new Member(m.userName,m.getEmail(),m.getPassword(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
   }
 
   // Member to MemberRequest conversion
   public MemberRequest(Member m){
     this.userName = m.getUserName();
-    this.password = m.getPassword();
     this.email = m.getEmail();
+    this.password = m.getPassword();
     this.street = m.getStreet();
     this.city = m.getCity();
     this.zip = m.getZip();

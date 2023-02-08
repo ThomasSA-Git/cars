@@ -2,7 +2,6 @@ package dat3.cars.api;
 
 import dat3.cars.dto.MemberRequest;
 import dat3.cars.dto.MemberResponse;
-import dat3.cars.repositories.MemberRepository;
 import dat3.cars.service.MemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,13 +12,10 @@ import java.util.List;
 class MemberController {
 
   private MemberService memberService;
-  private final MemberRepository memberRepository;
 
-  public MemberController(MemberService memberService,
-                          MemberRepository memberRepository) {
+
+  public MemberController(MemberService memberService) {
     this.memberService = memberService;
-
-    this.memberRepository = memberRepository;
   }
 
   //ADMIN ONLY
@@ -28,7 +24,7 @@ class MemberController {
 
   //ADMIN
   @GetMapping(path = "/{username}")
-  MemberResponse getMemberById(@PathVariable String username) throws Exception {return memberService.findMemberByUserName(username);}
+  MemberResponse getMemberById(@PathVariable String username) throws Exception {return memberService.findMemberByUserId(username);}
 
   //ANONYMOUS
   //@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
