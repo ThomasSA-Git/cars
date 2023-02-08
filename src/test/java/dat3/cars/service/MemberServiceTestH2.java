@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class MemberServiceTestH2 {
 
 
-
   @Autowired
   private MemberRepository memberRepository;
 
@@ -46,12 +45,12 @@ class MemberServiceTestH2 {
 
 
   @Test
-    void getMembers() {
-      List<MemberResponse> response = memberService.getMembers(false);
-      assertEquals(2,response.size());
-      assertThat(response, containsInAnyOrder(hasProperty("email", is("m1@a.dk")), hasProperty("email", is("mm@a.dk"))));
+  void getMembers() {
+    List<MemberResponse> response = memberService.getMembers(false);
+    assertEquals(2, response.size());
+    assertThat(response, containsInAnyOrder(hasProperty("email", is("m1@a.dk")), hasProperty("email", is("mm@a.dk"))));
 
-    }
+  }
 
   @Test
   void addMember() {
@@ -68,7 +67,7 @@ class MemberServiceTestH2 {
     MemberRequest request = new MemberRequest(newMember);
 
     Throwable exception = assertThrows(ResponseStatusException.class, () ->
-      memberService.addMember(request));
+        memberService.addMember(request));
     String expectedMessage = "Member with this ID already exist";
     String actualMessage = exception.getMessage();
 
