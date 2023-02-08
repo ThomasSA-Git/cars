@@ -8,12 +8,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 @DataJpaTest
 class MemberServiceTestH2 {
@@ -61,6 +63,19 @@ class MemberServiceTestH2 {
   }
 
   @Test
+  void addMemberException() {
+    Member newMember = new Member("m1", "m3@a.dk", "pw", "aa", "aaa", "aaaa", "aaaa", "1234");
+    MemberRequest request = new MemberRequest(newMember);
+
+    Throwable exception = assertThrows(ResponseStatusException.class, () ->
+      memberService.addMember(request));
+    String expectedMessage = "Member with this ID already exist";
+    String actualMessage = exception.getMessage();
+
+    assertTrue(actualMessage.contains(expectedMessage));
+  }
+
+  @Test
   void deleteMember() {
     Member newMember = new Member("m3", "m3@a.dk", "pw", "aa", "aaa", "aaaa", "aaaa", "1234");
     MemberRequest request = new MemberRequest(newMember);
@@ -77,6 +92,17 @@ class MemberServiceTestH2 {
     MemberResponse memberResponse = memberService.findMemberByUserId("m1");
     assertEquals("m1@a.dk", memberResponse.getEmail());
   }
+
+  @Test
+  void findMemberByUserIdException() {
+    Throwable exception = assertThrows(ResponseStatusException.class, () ->
+        memberService.findMemberByUserId("m5"));
+    String expectedMessage = "Member with this ID does not exist";
+    String actualMessage = exception.getMessage();
+
+    assertTrue(actualMessage.contains(expectedMessage));
+  }
+
 
   @Test
   void updateRanking() {
