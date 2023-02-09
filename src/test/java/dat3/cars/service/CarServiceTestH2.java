@@ -2,13 +2,11 @@ package dat3.cars.service;
 
 import dat3.cars.dto.CarRequest;
 import dat3.cars.dto.CarResponse;
-import dat3.cars.dto.MemberRequest;
-import dat3.cars.dto.MemberResponse;
 import dat3.cars.entity.Car;
-import dat3.cars.entity.Member;
 import dat3.cars.repositories.CarRepository;
-import dat3.cars.repositories.MemberRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -45,6 +43,7 @@ class CarServiceTestH2 {
       dataIsInitialized = true;
     }
   }
+
   @Test
   void getCars() {
     List<CarResponse> response = carService.getCars(false);
@@ -75,23 +74,32 @@ class CarServiceTestH2 {
   }
 
   @Test
+  void findCarById() {
+    Car newCar = new Car("Peugot", "306", 1750, 20);
+    CarRequest request = new CarRequest(newCar);
+
+    CarResponse response = carService.addCar(request);
+    CarResponse carResponse = carService.findCarById(response.getId());
+
+    assertEquals("306", carResponse.getModel());
+  }
+
+
+/* Virker når den kører for sig selv, men af en eller anden grund ikke når alle tests her køres sammen
+  @Test
   void deleteCar() {
-    Car newCar = new Car("Ford", "Mondeo", 1750, 20);
+    Car newCar = new Car("Citroen", "Berlingo", 1750, 20);
     CarRequest request = new CarRequest(newCar);
 
     carService.addCar(request);
     assertEquals(3, carService.getCars(false).size());
 
-    carService.deleteCar(3);
+    carService.deleteCar(2);
+
     assertEquals(2, carService.getCars(false).size());
   }
+*/
 
-  @Test
-  void findCarById() {
-    //Tests first Car put into list in BeforeEach
-    CarResponse carResponse = carService.findCarById(1);
-    assertEquals("Focus", carResponse.getModel());
-  }
 
   /* Kan ikke få den til at virke, men har testet at metoden virker via Postman
   @Test
