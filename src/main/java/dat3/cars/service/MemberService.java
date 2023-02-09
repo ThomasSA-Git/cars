@@ -63,8 +63,8 @@ public class MemberService {
   }
 
   public ResponseEntity updateMember(MemberRequest request, String id) {
-
-    return null;
+    Member updatedMember = MemberRequest.getMemberEntity(request);
+    return memberRepository.update(id, updatedMember);
   }
 
 }

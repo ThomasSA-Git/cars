@@ -36,7 +36,7 @@ public class CarController {
   //MEMBER
   @PutMapping("/{id}")
   ResponseEntity<Boolean> editCar(@RequestBody MemberRequest body, @PathVariable int id){
-    return null;
+    return carService.updateCar(body, id);
   }
 
   //ADMIN

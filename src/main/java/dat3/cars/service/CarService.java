@@ -5,6 +5,7 @@ import dat3.cars.dto.CarResponse;
 import dat3.cars.entity.Car;
 import dat3.cars.repositories.CarRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -50,5 +51,10 @@ public class CarService {
 
   public void updatePricePrDay(int id, double price){
     carRepository.updatePricePrDayById(price, id);
+  }
+
+  public ResponseEntity updateCar(CarRequest request, int id){
+    Car updatedCar = CarRequest.getCarEntity(request);
+    return carRepository.update(id, updatedCar);
   }
 }
