@@ -9,13 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface CarRepository extends JpaRepository<Car, Integer> {
-  @Transactional
-  @Modifying
-  @Query("update Car c set c.pricePrDay = ?1 where c.id = ?2")
-  int updatePricePrDayById(@NonNull double pricePrDay, @NonNull int id);
+import java.util.Optional;
 
-  ResponseEntity<Boolean> update(int id, Car car);
+public interface CarRepository extends JpaRepository<Car, Integer> {
+
+
   Boolean existsByModel(String model);
 
   Car findCarById(int id);

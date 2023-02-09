@@ -50,11 +50,18 @@ public class CarService {
   }
 
   public void updatePricePrDay(int id, double price){
-    carRepository.updatePricePrDayById(price, id);
+    Car updatedCar = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car with this ID does not exist"));
+    updatedCar.setPricePrDay(price);
+    carRepository.save(updatedCar);
   }
 
-  public ResponseEntity updateCar(CarRequest request, int id){
-    Car updatedCar = CarRequest.getCarEntity(request);
-    return carRepository.update(id, updatedCar);
+  public void updateCar(CarRequest request, int id){
+    Car updatedCar = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car with this ID does not exist"));
+    updatedCar.setBrand(request.getBrand());
+    updatedCar.setModel(request.getModel());
+    updatedCar.setPricePrDay(request.getPricePrDay());
+    updatedCar.setBestDiscount(request.getBestDiscount());
+    carRepository.save(updatedCar);
+
   }
 }

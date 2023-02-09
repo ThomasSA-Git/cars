@@ -35,8 +35,8 @@ class MemberController {
 
   //MEMBER
   @PutMapping("/{username}")
-  ResponseEntity<Boolean> editMember(@RequestBody MemberRequest body, @PathVariable String username){
-    return memberService.updateMember(body, username);
+  void editMember(@RequestBody MemberRequest body, @PathVariable String username){
+    memberService.updateMember(body, username);
   }
 
   //ADMIN

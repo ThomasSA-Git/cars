@@ -11,14 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
-  @Transactional
-  @Modifying
-  @Query("update Member m set m.ranking = ?1 where m.userName = ?2")
-  int updateRankingByUserName(@NonNull int ranking, @NonNull String userName);
+
 
   Boolean existsByEmail(String email);
 
-  ResponseEntity<Boolean> update(String userName, Member member);
 
   Member findMemberByUserName(String userName);
 
