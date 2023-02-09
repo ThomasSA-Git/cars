@@ -17,7 +17,7 @@
         fetch("api/cars")
             .then(res => res.json())
             .then(data => {
-                const listItems = data.map(c => `<li>${c.brand} - c.model}</li>`)
+                const listItems = data.map(c => `<li>${c.brand} - ${c.model}</li>`)
                 document.getElementById("cars").innerHTML = listItems.join("\n")
             })
     }
