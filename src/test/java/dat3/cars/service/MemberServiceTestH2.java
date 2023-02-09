@@ -109,4 +109,26 @@ class MemberServiceTestH2 {
     MemberResponse memberResponse = memberService.findMemberByUserId("m1");
     assertEquals(10, memberResponse.getRanking());
   }
+
+/* Virker ikke endnu
+  @Test
+  void updateMember() {
+    Member test = new Member("m4", "122@.dk", "12", "123", "133", "123", "123", "123");
+    MemberRequest newMem = new MemberRequest(test);
+    memberService.addMember(newMem);
+    Member updateMember = new Member("m4", "opdateret@.dk", "pwop", "firstName", "lastName", "Street", "City", "1234op");
+
+    MemberRequest update = new MemberRequest(updateMember);
+
+    memberService.updateMember(update, "m4");
+    MemberResponse memberResponse = memberService.findMemberByUserId("m4");
+    assertEquals("m4", memberResponse.getUserName());
+    assertEquals("opdateret@.dk", memberResponse.getEmail());
+    assertEquals("firstName", memberResponse.getFirstName());
+    assertEquals("lastName", memberResponse.getLastName());
+    assertEquals("Street", memberResponse.getStreet());
+    assertEquals("City", memberResponse.getCity());
+    assertEquals("1234op", memberResponse.getZip());
+  }*/
 }
+

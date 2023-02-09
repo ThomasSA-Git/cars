@@ -70,7 +70,8 @@ public class MemberService {
     updatedMember.setUserName(request.getUserName());
     updatedMember.setFirstName(request.getFirstName());
     updatedMember.setLastName(request.getLastName());
-    updatedMember.setEmail(request.getStreet());
+    updatedMember.setEmail(request.getEmail());
+    updatedMember.setStreet(request.getStreet());
     updatedMember.setZip(request.getZip());
     updatedMember.setCity(request.getCity());
     updatedMember.setPassword(request.getPassword());

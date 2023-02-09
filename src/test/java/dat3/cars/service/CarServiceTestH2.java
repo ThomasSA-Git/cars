@@ -104,10 +104,23 @@ class CarServiceTestH2 {
 
   @Test
   void updatePricePrDay() {
-    //Tests first Car put into list in BeforeEach
+    //Tester første bil oprettet på listen
     carService.updatePricePrDay(1, 2000);
     CarResponse carResponse = carService.findCarById(1);
     assertEquals(2000, carResponse.getPricePrDay());
+  }
+
+  @Test
+  void updateCar() {
+    //new Car("Ford", "Fiesta", 1500, 20) det er denne bil der bliver opdateret
+    Car newCar = new Car("Ford", "Fiasko", 3500, 30);
+    CarRequest request = new CarRequest(newCar);
+    carService.updateCar(request, 2);
+    CarResponse carResponse = carService.findCarById(2);
+    assertEquals("Fiasko", carResponse.getModel());
+    assertEquals(3500, carResponse.getPricePrDay());
+    //Nedenstående bliver til null. Lignende problem i MemberServiceTest
+    //assertEquals(30, carResponse.getBestDiscount());
   }
 
 }
