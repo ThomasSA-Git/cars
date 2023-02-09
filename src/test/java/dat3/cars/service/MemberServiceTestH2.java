@@ -102,13 +102,11 @@ class MemberServiceTestH2 {
     assertTrue(actualMessage.contains(expectedMessage));
   }
 
-
-/* Kan ikke få den til at virke, men har testet at metoden virker via Postman
   @Test
   void updateRanking() {
 
     memberService.updateRanking("m1", 10);
     MemberResponse memberResponse = memberService.findMemberByUserId("m1");
     assertEquals(10, memberResponse.getRanking());
-  }*/
+  }
 }

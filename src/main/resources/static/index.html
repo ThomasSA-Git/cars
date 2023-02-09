@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<h1>List of cars</h1>
+<button id="btn-load">Load Cars</button>
+<ul id="cars"></ul>
+
+<script type="application/javascript">
+    document.getElementById("btn-load").onclick = getCars;
+
+
+    function getCars() {
+        fetch("api/cars")
+            .then(res => res.json())
+            .then(data => {
+                const listItems = data.map(c => `<li>${c.brand} - c.model}</li>`)
+                document.getElementById("cars").innerHTML = listItems.join("\n")
+            })
+    }
+
+
+</script>
+</body>
+</html>
