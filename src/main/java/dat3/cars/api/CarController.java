@@ -35,7 +35,7 @@ public class CarController {
 
   //MEMBER
   @PutMapping("/{id}")
-  ResponseEntity<Boolean> editCar(@RequestBody MemberRequest body, @PathVariable int id){
+  ResponseEntity<Boolean> editCar(@RequestBody CarRequest body, @PathVariable int id){
     return carService.updateCar(body, id);
   }
 
