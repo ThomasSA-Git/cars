@@ -85,7 +85,8 @@ class CarServiceTestH2 {
   }
 
 
-/* Virker når den kører for sig selv, men af en eller anden grund ikke når alle tests her køres sammen
+/*
+
   @Test
   void deleteCar() {
     Car newCar = new Car("Citroen", "Berlingo", 1750, 20);
@@ -98,6 +99,7 @@ class CarServiceTestH2 {
 
     assertEquals(2, carService.getCars(false).size());
   }
+
 */
 
 

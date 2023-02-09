@@ -5,9 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -24,10 +21,9 @@ class MemberRepositoryTest {
     if (!dataIsArranged) {
       List<Member> members = List.of(
           new Member("m1", "m1@a.dk", "test12", "bb", "Olsen", "xx vej 34", "Lyngby", "2800"),
-          new Member("m2", "mm@a.dk", "pw", "bb", "bbb", "bbbb", "bbbb", "1234")
-      );
-      memberRepository.saveAll(members);
-      dataIsArranged = true;
+          new Member("m2", "mm@a.dk", "pw", "bb", "bbb", "bbbb", "bbbb", "1234"));
+          memberRepository.saveAll(members);
+          dataIsArranged = true;
     }
   }
 
