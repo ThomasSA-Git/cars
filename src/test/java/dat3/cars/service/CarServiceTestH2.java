@@ -12,12 +12,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class CarServiceTestH2 {
@@ -61,6 +62,19 @@ class CarServiceTestH2 {
   }
 
   @Test
+  void addCarException() {
+    Car newCar = new Car("Ford", "Focus", 1750, 20);
+    CarRequest request = new CarRequest(newCar);
+
+    Throwable exception = assertThrows(ResponseStatusException.class, () ->
+        carService.addCar(request));
+    String expectedMessage = "Model with this name already exist";
+    String actualMessage = exception.getMessage();
+
+    assertTrue(actualMessage.contains(expectedMessage));
+  }
+
+  @Test
   void deleteCar() {
     Car newCar = new Car("Ford", "Mondeo", 1750, 20);
     CarRequest request = new CarRequest(newCar);
@@ -74,12 +88,14 @@ class CarServiceTestH2 {
 
   @Test
   void findCarById() {
+    //Tests first Car put into list in BeforeEach
     CarResponse carResponse = carService.findCarById(1);
     assertEquals("Focus", carResponse.getModel());
   }
 
   @Test
   void updatePricePrDay() {
+    //Tests first Car put into list in BeforeEach
     carService.updatePricePrDay(1, 2000);
     CarResponse carResponse = carService.findCarById(1);
     assertEquals(2000, carResponse.getPricePrDay());
