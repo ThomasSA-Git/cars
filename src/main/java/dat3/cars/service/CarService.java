@@ -40,8 +40,15 @@ public class CarService {
     return new CarResponse(newCar, false);
   }
 
-  public void deleteCar(int id){
-    carRepository.delete(carRepository.getReferenceById(id));
+
+  public ResponseEntity<Boolean> deleteCar(int id) {
+    Car carToDelete = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this ID does not exist"));
+    try {
+      carRepository.delete(carToDelete);
+      return ResponseEntity.ok(true);
+    } catch (Exception e) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not delete car. Most likely because it part of a rental/reservation");
+    }
   }
 
   public CarResponse findCarById(int id){
@@ -55,13 +62,15 @@ public class CarService {
     carRepository.save(updatedCar);
   }
 
-  public void updateCar(CarRequest request, int id){
-    Car updatedCar = carRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Car with this ID does not exist"));
-    updatedCar.setBrand(request.getBrand());
-    updatedCar.setModel(request.getModel());
-    updatedCar.setPricePrDay(request.getPricePrDay());
-    updatedCar.setBestDiscount(request.getBestDiscount());
-    carRepository.save(updatedCar);
-
+  public ResponseEntity<Boolean> updateCar(CarRequest body, int id) {
+    Car carToEdit = carRepository.findById(id).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this ID does not exist"));
+    //ID can not be changed
+    carToEdit.setBrand(body.getBrand());
+    carToEdit.setModel(body.getModel());
+    carToEdit.setPricePrDay(body.getPricePrDay());
+    carToEdit.setBestDiscount(body.getBestDiscount());
+    carRepository.save(carToEdit);
+    return ResponseEntity.ok(true);
   }
 }

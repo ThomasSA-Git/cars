@@ -48,11 +48,19 @@ public class MemberService {
     return new MemberResponse(newMember, false);
   }
 
-  public void deleteMember(String id) {
-    memberRepository.delete(memberRepository.getReferenceById(id));
+  public ResponseEntity<Boolean> deleteMember(String username) {
+    try {
+      if (memberRepository.existsById(username)) {
+        memberRepository.deleteById(username);
+        return new ResponseEntity<>(true, HttpStatus.OK);
+      }
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not delete member, he is probably 'Active'");
+    } catch (Exception e) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not delete member, he's probably 'Active'");
+    }
   }
 
-  public MemberResponse findMemberByUserId(String userName) {
+    public MemberResponse findMemberByUserId(String userName) {
     Member foundMember = memberRepository.findById(userName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
     //Member foundMember = memberRepository.findMemberByUserName(userName);
     return new MemberResponse(foundMember, true);
@@ -65,17 +73,20 @@ public class MemberService {
       memberRepository.save(updatedMember);
   }
 
-  public void updateMember(MemberRequest request, String id) {
-    Member updatedMember = memberRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
-    updatedMember.setUserName(request.getUserName());
-    updatedMember.setFirstName(request.getFirstName());
-    updatedMember.setLastName(request.getLastName());
-    updatedMember.setEmail(request.getEmail());
-    updatedMember.setStreet(request.getStreet());
-    updatedMember.setZip(request.getZip());
-    updatedMember.setCity(request.getCity());
-    updatedMember.setPassword(request.getPassword());
-    memberRepository.save(updatedMember);
+  public ResponseEntity<Boolean> updateMember(MemberRequest body, String username){
+    Member memberToEdit = memberRepository.findById(username).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this ID does not exist"));
+
+    //Member can not change his username (primary key), ranking, approved and timestamps
+    memberToEdit.setEmail(body.getEmail());
+    memberToEdit.setPassword(body.getPassword());
+    memberToEdit.setFirstName(body.getFirstName());
+    memberToEdit.setLastName(body.getLastName());
+    memberToEdit.setStreet(body.getStreet());
+    memberToEdit.setZip(body.getZip());
+    memberToEdit.setCity(body.getCity());
+    memberRepository.save(memberToEdit);
+    return new ResponseEntity<>(true, HttpStatus.OK);
   }
 
 }

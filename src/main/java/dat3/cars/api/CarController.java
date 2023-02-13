@@ -35,8 +35,8 @@ public class CarController {
 
   //ADMIN
   @PutMapping("/{id}")
-  void editCar(@RequestBody CarRequest body, @PathVariable int id){
-  carService.updateCar(body, id);
+  ResponseEntity<Boolean> editCar(@RequestBody CarRequest body, @PathVariable int id){
+  return carService.updateCar(body, id);
   }
 
   //ADMIN
@@ -47,7 +47,7 @@ public class CarController {
 
   //ADMIN
   @DeleteMapping("/{id}")
-  void deleteCarById(@PathVariable int id) {
-    carService.deleteCar(id);
+  ResponseEntity<Boolean> deleteCarById(@PathVariable int id) {
+    return carService.deleteCar(id);
   }
 }

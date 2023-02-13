@@ -7,9 +7,7 @@ import dat3.cars.repositories.MemberRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Controller;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 public class DeveloperData implements ApplicationRunner {
