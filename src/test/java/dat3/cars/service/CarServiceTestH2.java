@@ -21,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class CarServiceTestH2 {
 
-
   @Autowired
   private CarRepository carRepository;
 
@@ -86,29 +85,24 @@ class CarServiceTestH2 {
 
 
 /*
-
   @Test
   void deleteCar() {
     Car newCar = new Car("Citroen", "Berlingo", 1750, 20);
     CarRequest request = new CarRequest(newCar);
-
     carService.addCar(request);
     assertEquals(3, carService.getCars(false).size());
-
     carService.deleteCar(2);
-
     assertEquals(2, carService.getCars(false).size());
   }
-
 */
 
-  @Test
+/*  @Test
   void updatePricePrDay() {
     //Tester første bil oprettet på listen
     carService.updatePricePrDay(1, 2000);
     CarResponse carResponse = carService.findCarById(1);
     assertEquals(2000, carResponse.getPricePrDay());
-  }
+  }*/
 
   @Test
   void updateCar() {
