@@ -39,6 +39,12 @@ class MemberController {
     return memberService.updateMember(body, username);
   }
 
+  //Security ADMIN  (eventually we will change it to use the currently logged in user)
+  @PutMapping("/v2/{username}")
+  ResponseEntity<Boolean> editMemberV2(@RequestBody MemberRequest body, @PathVariable String username){
+    return memberService.editMemberV2(body, username);
+  }
+
   //ADMIN
   @PatchMapping("/ranking/{username}/{value}")
   void setRankingForUser(@PathVariable String username, @PathVariable int value) {

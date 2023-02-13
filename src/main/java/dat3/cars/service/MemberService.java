@@ -89,4 +89,19 @@ public class MemberService {
     return new ResponseEntity<>(true, HttpStatus.OK);
   }
 
+  public ResponseEntity<Boolean> editMemberV2(MemberRequest body, String username){
+    Member memberToEdit = memberRepository.findById(username).orElseThrow(() ->
+        new ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this ID does not exist"));
+
+    Optional.ofNullable(body.getEmail()).ifPresent(memberToEdit::setEmail);
+    Optional.ofNullable(body.getPassword()).ifPresent(memberToEdit::setPassword);
+    Optional.ofNullable(body.getFirstName()).ifPresent(memberToEdit::setFirstName);
+    Optional.ofNullable(body.getLastName()).ifPresent(memberToEdit::setLastName);
+    Optional.ofNullable(body.getStreet()).ifPresent(memberToEdit::setStreet);
+    Optional.ofNullable(body.getZip()).ifPresent(memberToEdit::setZip);
+    Optional.ofNullable(body.getCity()).ifPresent(memberToEdit::setCity);
+    memberRepository.save(memberToEdit);
+    return new ResponseEntity<>(true, HttpStatus.OK);
+  }
+
 }
