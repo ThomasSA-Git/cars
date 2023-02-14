@@ -35,7 +35,7 @@ public class MemberService {
 
   public MemberResponse addMember(MemberRequest memberRequest) {
     //Later you should add error checks --> Missing arguments, email taken etc.
-    if (memberRepository.existsById(memberRequest.getUserName())) {
+    if (memberRepository.existsById(memberRequest.getUsername())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this ID already exist");
     }
     if (memberRepository.existsByEmail(memberRequest.getEmail())) {

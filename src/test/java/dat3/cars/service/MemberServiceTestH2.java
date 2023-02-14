@@ -82,7 +82,7 @@ class MemberServiceTestH2 {
     memberService.addMember(request);
     assertEquals(3, memberService.getMembers(false).size());
 
-    memberService.deleteMember(request.getUserName());
+    memberService.deleteMember(request.getUsername());
     assertEquals(2, memberService.getMembers(false).size());
   }
 
