@@ -55,6 +55,7 @@ public class Member extends UserWithRoles {
 
   private int ranking;
 
+
   @CreationTimestamp
   private LocalDateTime created;
 

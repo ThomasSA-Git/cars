@@ -1,7 +1,10 @@
-package dat3.cars.entity;
+package dat3.cars.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import dat3.cars.entity.Car;
+import dat3.cars.entity.Member;
+import dat3.cars.entity.Reservation;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -14,28 +17,26 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
-public class Reservation {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ReservationRequest {
 
-  @Id
-  Integer id;
-
-  @ManyToOne
   Member member;
 
-  @ManyToOne
   Car car;
 
-  @CreationTimestamp
   @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime reservationDate;
 
   @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime rentalDate;
 
-  public Reservation(Member member, Car car) {
-    this.member = member;
-    this.car = car;
+  public static Reservation getReservationEntity(ReservationRequest r){
+    return new Reservation(r.getMember(), r.getCar());
+  }
+
+  public ReservationRequest(Reservation r) {
+    this.member = r.getMember();
+    this.car = r.getCar();
   }
 
 }
