@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
