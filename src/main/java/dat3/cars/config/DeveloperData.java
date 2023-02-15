@@ -2,9 +2,10 @@ package dat3.cars.config;
 
 import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
+import dat3.cars.entity.Reservation;
 import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRepository;
-import dat3.cars.repository.MemberRepository;
+import dat3.cars.repository.ReservationRepository;
 import dat3.security.entity.Role;
 import dat3.security.entity.UserWithRoles;
 import dat3.security.repository.UserWithRolesRepository;
@@ -16,21 +17,24 @@ import org.springframework.stereotype.Controller;
 import java.util.*;
 
 @Controller
-@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
+@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.cars.repository"})
 public class DeveloperData implements ApplicationRunner {
 
   private CarRepository carRepository;
 
   private MemberRepository memberRepository;
 
+  private ReservationRepository reservationRepository;
+
   @Autowired
   UserWithRolesRepository userWithRolesRepository;
   final String passwordUsedByAll = "test12";
 
 
- public DeveloperData(CarRepository carRepository, MemberRepository memberRepository) {
+ public DeveloperData(CarRepository carRepository, MemberRepository memberRepository, ReservationRepository reservationRepository) {
     this.carRepository = carRepository;
     this.memberRepository = memberRepository;
+    this.reservationRepository = reservationRepository;
   }
 
   @Override
@@ -53,7 +57,7 @@ public class DeveloperData implements ApplicationRunner {
     Member member1 = new Member("test1", "jk@mail.com", "Kode", "John", "Doe", "Testgade 1", "Testby", "2500");
     Member member2 = new Member("test2", "jik@mail.com", "Kode", "Jimmy", "Doe", "Testgade 2", "Testby", "2600");
     Member member3 = new Member("test3", "tk@mail.com", "Kode", "Timmy", "Doe", "Testgade 3", "Testby", "2700");
-
+/*
     //Add favourite color
     List<String> color = new ArrayList<>();
     color.add("green");
@@ -71,7 +75,7 @@ public class DeveloperData implements ApplicationRunner {
     phones.put("Home", "75504659");
     member1.setPhones(phones);
     member2.setPhones(phones);
-    member3.setPhones(phones);
+    member3.setPhones(phones);*/
 
     List<Member> memberEntities = new ArrayList<Member>();
     memberEntities.add(member1);
@@ -80,7 +84,16 @@ public class DeveloperData implements ApplicationRunner {
 
     memberRepository.saveAll(memberEntities);
 
+    Reservation reservation1 = new Reservation(member1, car1);
+    Reservation reservation2 = new Reservation(member2, car2);
+    List<Reservation> reservationList = new ArrayList<>();
+    reservationList.add(reservation1);
+    reservationList.add(reservation2);
+
+
     setupUserWithRoleUsers();
+
+    reservationRepository.saveAll(reservationList);
 
   }
 

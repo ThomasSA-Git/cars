@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -29,6 +30,9 @@ public class Car {
 
   @Column(name="max_discount")
   private int bestDiscount;
+
+/*  @OneToMany
+  List<Reservation> reservation;*/
 
   @CreationTimestamp
   private LocalDateTime created;

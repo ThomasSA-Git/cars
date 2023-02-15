@@ -36,13 +36,15 @@ public class Member extends UserWithRoles {
 
   private String lastName;
 
-  @ElementCollection
-  private List<String> favoriteCarColors = new ArrayList<>();
+/*  @ElementCollection
+  private List<String> favoriteCarColors = new ArrayList<>();*/
 
+/*
   @ElementCollection
   @MapKeyColumn(name = "Description")
   @Column(name = "phoneNumber")
   private Map<String,String> phones = new HashMap<>();
+*/
 
 
   private String street;
@@ -55,6 +57,8 @@ public class Member extends UserWithRoles {
 
   private int ranking;
 
+/*  @OneToMany
+  List<Reservation> reservation;*/
 
   @CreationTimestamp
   private LocalDateTime created;

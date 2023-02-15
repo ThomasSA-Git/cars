@@ -1,11 +1,8 @@
 package dat3.cars.api;
 
 
-import dat3.cars.dto.CarRequest;
-import dat3.cars.dto.CarResponse;
 import dat3.cars.dto.ReservationRequest;
 import dat3.cars.dto.ReservationResponse;
-import dat3.cars.repository.ReservationRepository;
 import dat3.cars.service.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
