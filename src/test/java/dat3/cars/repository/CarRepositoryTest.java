@@ -1,4 +1,4 @@
-package dat3.cars.repositories;
+package dat3.cars.repository;
 
 import dat3.cars.entity.Car;
 import org.junit.jupiter.api.BeforeEach;
