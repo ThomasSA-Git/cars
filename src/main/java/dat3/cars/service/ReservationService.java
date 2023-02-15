@@ -1,27 +1,34 @@
 package dat3.cars.service;
 
-import dat3.cars.dto.MemberRequest;
-import dat3.cars.dto.MemberResponse;
 import dat3.cars.dto.ReservationRequest;
 import dat3.cars.dto.ReservationResponse;
+import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
 import dat3.cars.entity.Reservation;
+import dat3.cars.repository.CarRepository;
+import dat3.cars.repository.MemberRepository;
 import dat3.cars.repository.ReservationRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ReservationService {
 
   ReservationRepository reservationRepository;
+  CarRepository carRepository;
+  MemberRepository memberRepository;
 
-  public ReservationService(ReservationRepository reservationRepository) {
+  public ReservationService(ReservationRepository reservationRepository, CarRepository carRepository, MemberRepository memberRepository) {
     this.reservationRepository = reservationRepository;
+    this.carRepository = carRepository;
+    this.memberRepository = memberRepository;
   }
 
   public List<ReservationResponse> getReservations(){
@@ -31,10 +38,18 @@ public class ReservationService {
   }
 
   public ReservationResponse addReservation(ReservationRequest reservationRequest){
-    if (reservationRepository.existsByCar(reservationRequest.getCar())) {
-      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car already added to reservation");
+
+    if (reservationRepository.existsByRentalDateAndCar(reservationRequest.getRentalDate(), reservationRequest.getCarId())){
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car already has reservation os this date");
     }
-    Reservation makeReservation = ReservationRequest.getReservationEntity(reservationRequest);
+    Car car = carRepository.findById(reservationRequest.getCarId())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this id does not exist"));
+    Member member = memberRepository.findById(reservationRequest.getUsername())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this username does not exist"));
+    if (reservationRequest.getRentalDate().isBefore(LocalDate.now())) {
+      throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Reservation date cannot be a date in the past");
+    }
+    Reservation makeReservation= new Reservation(member,car,reservationRequest.getRentalDate());
     makeReservation = reservationRepository.save(makeReservation);
     return new ReservationResponse(makeReservation);
   }
@@ -56,29 +71,15 @@ public class ReservationService {
     }
   }
 
-  public ResponseEntity<Boolean> editReservation(ReservationRequest body, int id) {
+/*  public ResponseEntity<Boolean> editReservation(ReservationRequest body, int id) {
     Reservation toEdit = reservationRepository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID does not exist"));
-
-    Optional.ofNullable(body.getMember()).ifPresent(toEdit::setMember);
-    Optional.ofNullable(body.getCar()).ifPresent(toEdit::setCar);
+//Skal finde ud af hvordan toEdit skal defineres
+    Optional.ofNullable(body.getUsername()).ifPresent(toEdit::);
+    Optional.ofNullable(body.getCarId()).ifPresent(toEdit::setCarId);
 
     reservationRepository.save(toEdit);
     return new ResponseEntity<>(true, HttpStatus.OK);
-  }
-/*    public void updateCar ( int id, int carId){
-    Reservation updatedReservation = reservationRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Reservation with this ID does not exist"));
-    updatedReservation.setCar();
-    reservationRepository.save(updatedReservation);
-    }*/
-/*
-  public void updateRanking(String userName, int ranking) {
-    Member updatedMember = memberRepository.findById(userName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
-
-    updatedMember.setRanking(ranking);
-    memberRepository.save(updatedMember);
-  }
-
   }*/
   }
 

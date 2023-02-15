@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -26,15 +27,14 @@ public class Reservation {
   Car car;
 
   @CreationTimestamp
-  @JsonFormat(pattern = "yyyy-MM-dd")
   private LocalDateTime reservationDate;
 
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  private LocalDateTime rentalDate;
+  private LocalDate rentalDate;
 
-  public Reservation(Member member, Car car) {
+  public Reservation(Member member, Car car, LocalDate rentalDate) {
     this.member = member;
     this.car = car;
+    this.rentalDate = rentalDate;
   }
 
 }

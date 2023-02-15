@@ -14,6 +14,9 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
@@ -84,8 +87,8 @@ public class DeveloperData implements ApplicationRunner {
 
     memberRepository.saveAll(memberEntities);
 
-    Reservation reservation1 = new Reservation(member1, car1);
-    Reservation reservation2 = new Reservation(member2, car2);
+    Reservation reservation1 = new Reservation(member1, car1, LocalDate.of(2023, 11, 11));
+    Reservation reservation2 = new Reservation(member2, car2, LocalDate.of(2023, 12, 12));
     List<Reservation> reservationList = new ArrayList<>();
     reservationList.add(reservation1);
     reservationList.add(reservation2);

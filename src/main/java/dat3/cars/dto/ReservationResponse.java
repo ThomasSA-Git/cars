@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -17,20 +18,18 @@ import java.time.LocalDateTime;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ReservationResponse {
 
-  Member member;
+  private int id;
+  private String username;
+  private String brand;
+  private int carId;
 
-  Car car;
-
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  private LocalDateTime reservationDate;
-
-  @JsonFormat(pattern = "yyyy-MM-dd")
-  private LocalDateTime rentalDate;
+  @JsonFormat(pattern = "yyyy-MM-dd",shape = JsonFormat.Shape.STRING)
+  private LocalDate rentalDate;
 
   public ReservationResponse(Reservation r) {
-    this.member = r.getMember();
-    this.car = r.getCar();
-    this.reservationDate = r.getReservationDate();
+    this.username = r.getMember().getUsername();
+    this.brand = r.getCar().getBrand();
+    this.carId = r.getCar().getId();
     this.rentalDate = r.getRentalDate();
   }
 
