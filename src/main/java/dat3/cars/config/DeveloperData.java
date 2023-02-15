@@ -2,14 +2,21 @@ package dat3.cars.config;
 
 import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
-import dat3.cars.repositories.CarRepository;
-import dat3.cars.repositories.MemberRepository;
+import dat3.cars.repository.CarRepository;
+import dat3.cars.repository.MemberRepository;
+import dat3.cars.repository.MemberRepository;
+import dat3.security.entity.Role;
+import dat3.security.entity.UserWithRoles;
+import dat3.security.repository.UserWithRolesRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 import java.util.*;
 
 @Controller
+@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
 public class DeveloperData implements ApplicationRunner {
 
   private CarRepository carRepository;
