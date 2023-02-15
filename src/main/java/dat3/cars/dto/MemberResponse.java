@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberResponse {
-  String userName; //Remember this is the primary key
+  String username; //Remember this is the primary key
   String email;
   String firstName;
   String lastName;
@@ -32,7 +32,7 @@ public class MemberResponse {
 
   //Convert Member Entity to Member DTO
   public MemberResponse(Member m, boolean includeAll) {
-    this.userName = m.getUserName();
+    this.username = m.getUsername();
     this.email = m.getEmail();
     this.street = m.getStreet();
     this.firstName =m.getFirstName();

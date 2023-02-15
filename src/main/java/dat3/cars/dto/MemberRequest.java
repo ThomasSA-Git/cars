@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 //@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MemberRequest {
-  String userName;
+  String username;
   String email;
   String password;
   String firstName;
@@ -20,12 +20,12 @@ public class MemberRequest {
   String zip;
 
   public static Member getMemberEntity(MemberRequest m){
-    return new Member(m.userName,m.getEmail(),m.getPassword(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
+    return new Member(m.username,m.getEmail(),m.getPassword(), m.firstName, m.lastName,m.getStreet(), m.getCity(), m.getZip());
   }
 
   // Member to MemberRequest conversion
   public MemberRequest(Member m){
-    this.userName = m.getUserName();
+    this.username = m.getUsername();
     this.email = m.getEmail();
     this.password = m.getPassword();
     this.street = m.getStreet();

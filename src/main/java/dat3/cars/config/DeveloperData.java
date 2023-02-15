@@ -2,23 +2,26 @@ package dat3.cars.config;
 
 import dat3.cars.entity.Car;
 import dat3.cars.entity.Member;
-import dat3.cars.repository.CarRepository;
-import dat3.cars.repository.MemberRepository;
+import dat3.cars.repositories.CarRepository;
+import dat3.cars.repositories.MemberRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 import java.util.*;
 
 @Controller
-@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
 public class DeveloperData implements ApplicationRunner {
 
   private CarRepository carRepository;
 
   private MemberRepository memberRepository;
 
-  public DeveloperData(CarRepository carRepository, MemberRepository memberRepository) {
+  @Autowired
+  UserWithRolesRepository userWithRolesRepository;
+  final String passwordUsedByAll = "test12";
+
+
+ public DeveloperData(CarRepository carRepository, MemberRepository memberRepository) {
     this.carRepository = carRepository;
     this.memberRepository = memberRepository;
   }
@@ -70,5 +73,36 @@ public class DeveloperData implements ApplicationRunner {
 
     memberRepository.saveAll(memberEntities);
 
+    setupUserWithRoleUsers();
+
   }
+
+
+
+  /*****************************************************************************************
+   NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL
+   iT'S ONE OF THE TOP SECURITY FLAWS YOU CAN DO
+   *****************************************************************************************/
+  private void setupUserWithRoleUsers() {
+
+    System.out.println("******************************************************************************");
+    System.out.println("******* NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL ************");
+    System.out.println("******* REMOVE THIS BEFORE DEPLOYMENT, AND SETUP DEFAULT USERS DIRECTLY  *****");
+    System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
+    System.out.println("******************************************************************************");
+    UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
+    UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
+    UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
+    UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@a.dk");
+    user1.addRole(Role.USER);
+    user1.addRole(Role.ADMIN);
+    user2.addRole(Role.USER);
+    user3.addRole(Role.ADMIN);
+    //No Role assigned to user4
+    userWithRolesRepository.save(user1);
+    userWithRolesRepository.save(user2);
+    userWithRolesRepository.save(user3);
+    userWithRolesRepository.save(user4);
+  }
+
 }
