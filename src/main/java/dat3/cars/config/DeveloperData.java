@@ -6,10 +6,12 @@ import dat3.cars.repository.CarRepository;
 import dat3.cars.repository.MemberRepository;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
 import java.util.*;
 
 @Controller
+@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.car.repository"})
 public class DeveloperData implements ApplicationRunner {
 
   private CarRepository carRepository;
