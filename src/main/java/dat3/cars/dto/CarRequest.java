@@ -22,7 +22,7 @@ public class CarRequest {
 
 
   public static Car getCarEntity(CarRequest c){
-    return new Car(c.brand, c.model, c.pricePrDay, c.bestDiscount);
+    return Car.builder().brand(c.brand).model(c.model).pricePrDay(c.pricePrDay).bestDiscount(c.bestDiscount).build();
   }
 
   public CarRequest(Car c) {

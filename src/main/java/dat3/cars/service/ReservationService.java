@@ -12,9 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -39,19 +37,15 @@ public class ReservationService {
 
   public ReservationResponse addReservation(ReservationRequest reservationRequest){
 
-    if (reservationRepository.existsByRentalDateAndCar(reservationRequest.getRentalDate(), reservationRequest.getCarId())){
+    if (reservationRepository.existsByCarIdAndRentalDate(reservationRequest.getCarId(), reservationRequest.getRentalDate())){
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car already has reservation on this date");
     }
-
-    Car car = carRepository.findById(reservationRequest.getCarId())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this id does not exist"));
-    Member member = memberRepository.findById(reservationRequest.getUsername())
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this username does not exist"));
+    Car car = carRepository.findById(reservationRequest.getCarId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this id does not exist"));
+    Member member = memberRepository.findById(reservationRequest.getUsername()).orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this username does not exist"));
 
     if (reservationRequest.getRentalDate().isBefore(LocalDate.now())) {
       throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Reservation date cannot be a date in the past");
     }
-
     Reservation makeReservation= new Reservation(member,car,reservationRequest.getRentalDate());
     makeReservation = reservationRepository.save(makeReservation);
 

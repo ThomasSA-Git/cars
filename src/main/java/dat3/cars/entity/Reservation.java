@@ -18,7 +18,7 @@ public class Reservation {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Integer id;
+  int id;
 
   @ManyToOne
   Member member;

@@ -31,7 +31,7 @@ public class Car {
   @Column(name="max_discount")
   private int bestDiscount;
 
-  @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany//(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Reservation> reservation;
 
   @CreationTimestamp
@@ -40,12 +40,13 @@ public class Car {
   @UpdateTimestamp
   private LocalDateTime lastEdited;
 
-
+/*
+Fik prøvet builder af i stedet.
   public Car(String brand, String model, double pricePrDay, int bestDiscount) {
     this.brand = brand;
     this.model = model;
     this.pricePrDay = pricePrDay;
     this.bestDiscount = bestDiscount;
-  }
+  }*/
 
 }

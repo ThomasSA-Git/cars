@@ -33,8 +33,8 @@ class CarServiceTestH2 {
     carService = new CarService(carRepository);
     if (!dataIsInitialized) {
       List<Car> cars = List.of(
-          new Car("Ford", "Focus", 1250, 20),
-          new Car("Ford", "Fiesta", 1500, 20)
+          Car.builder().brand("Ford").model("Focus").pricePrDay(1250).bestDiscount(20).build(),
+          Car.builder().brand("Ford").model("Fiesta").pricePrDay(1500).bestDiscount(20).build()
       );
       carRepository.saveAll(cars);
       dataIsInitialized = true;
@@ -50,7 +50,7 @@ class CarServiceTestH2 {
 
   @Test
   void addCar() {
-    Car newCar = new Car("Ford", "Mondeo", 1750, 20);
+    Car newCar =  Car.builder().brand("Ford").model("Mondeo").pricePrDay(1750).bestDiscount(20).build();
     CarRequest request = new CarRequest(newCar);
     CarResponse response = carService.addCar(request);
 
@@ -59,7 +59,7 @@ class CarServiceTestH2 {
 
   @Test
   void addCarException() {
-    Car newCar = new Car("Ford", "Focus", 1750, 20);
+    Car newCar =  Car.builder().brand("Ford").model("Focus").pricePrDay(1750).bestDiscount(20).build();
     CarRequest request = new CarRequest(newCar);
 
     Throwable exception = assertThrows(ResponseStatusException.class, () ->
@@ -72,7 +72,7 @@ class CarServiceTestH2 {
 
   @Test
   void findCarById() {
-    Car newCar = new Car("Peugot", "306", 1750, 20);
+    Car newCar =  Car.builder().brand("Peugot").model("306").pricePrDay(1750).bestDiscount(20).build();
     CarRequest request = new CarRequest(newCar);
 
     CarResponse response = carService.addCar(request);
@@ -105,7 +105,7 @@ class CarServiceTestH2 {
   @Test
   void updateCar() {
     //new Car("Ford", "Fiesta", 1500, 20) det er denne bil der bliver opdateret
-    Car newCar = new Car("Ford", "Fiasko", 3500, 30);
+    Car newCar =  Car.builder().brand("Ford").model("Fiasko").pricePrDay(3500).bestDiscount(30).build();
     CarRequest request = new CarRequest(newCar);
     carService.updateCar(request, 2);
     CarResponse carResponse = carService.findCarById(2);

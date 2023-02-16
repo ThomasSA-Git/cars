@@ -38,7 +38,7 @@ class MemberServiceTestH2 {
           new Member("m1", "m1@a.dk", "test12", "bb", "Olsen", "xx vej 34", "Lyngby", "2800"),
           new Member("m2", "mm@a.dk", "pw", "bb", "bbb", "bbbb", "bbbb", "1234")
       );
-      memberRepository.saveAll(members);
+      memberRepository.saveAllAndFlush(members);
       dataIsInitialized = true;
     }
   }

@@ -40,10 +40,17 @@ public class DeveloperData implements ApplicationRunner {
   public void run(ApplicationArguments args) throws Exception {
 
     //Create cars
-    Car car1 = new Car("Ford", "Focus", 1250, 20);
+/*    Car car1 = new Car("Ford", "Focus", 1250, 20);
     Car car2 = new Car("Ford", "Fiesta", 1500, 20);
-    Car car3 = new Car("Ford", "Mondeo", 1750, 20);
+    Car car3 = new Car("Ford", "Mondeo", 1750, 20);*/
 
+    List<Car> newCars = new ArrayList<>(Arrays.asList(
+        Car.builder().brand("Suzuki").model("Swift").pricePrDay(350).bestDiscount(6).build(),
+        Car.builder().brand("Kia").model("Optima").pricePrDay(450).bestDiscount(18).build(),
+        Car.builder().brand("WW").model("Wagon").pricePrDay(400).bestDiscount(20).build()));
+    carRepository.saveAll(newCars);
+
+/*
 
     List<Car> carEntities = new ArrayList<>();
     carEntities.add(car1);
@@ -51,6 +58,7 @@ public class DeveloperData implements ApplicationRunner {
     carEntities.add(car3);
 
     carRepository.saveAll(carEntities);
+*/
 
     //Create members
     Member member1 = new Member("test1", "jk@mail.com", "Kode", "John", "Doe", "Testgade 1", "Testby", "2500");
@@ -83,8 +91,8 @@ public class DeveloperData implements ApplicationRunner {
 
     memberRepository.saveAll(memberEntities);
 
-    Reservation reservation1 = new Reservation(member1, car1, LocalDate.of(2023, 11, 11));
-    Reservation reservation2 = new Reservation(member2, car2, LocalDate.of(2023, 12, 12));
+    Reservation reservation1 = new Reservation(member1, carRepository.findCarById(1), LocalDate.of(2023, 11, 11));
+    Reservation reservation2 = new Reservation(member2, carRepository.findCarById(2), LocalDate.of(2023, 12, 12));
     List<Reservation> reservationList = new ArrayList<>();
     reservationList.add(reservation1);
     reservationList.add(reservation2);

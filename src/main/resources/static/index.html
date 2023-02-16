@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Cars</title>
 </head>
 <body>
-<h1>List of cars</h1>
-<button id="btn-load">Load Cars</button>
-<ul id="cars"></ul>
-
-<script type="application/javascript">
-    document.getElementById("btn-load").onclick = getCars;
-
-
-    function getCars() {
-        fetch("api/cars")
-            .then(res => res.json())
-            .then(data => {
-                const listItems = data.map(c => `<li>${c.brand} - ${c.model}</li>`)
-                document.getElementById("cars").innerHTML = listItems.join("\n")
-            })
-    }
-
-
+<h1>List of all cars</h1>
+<table id="carTable">
+    <thead>
+    <tr>
+        <th>Car ID</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Price per Day</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<script>
+    fetch('/api/cars')
+        .then(response => response.json())
+        .then(cars => {
+            const carTable = document.getElementById('carTable');
+            const carTableBody = carTable.querySelector('tbody');
+            cars.forEach(car => {
+                const carRow = document.createElement('tr');
+                carRow.innerHTML = `
+						<td>${car.carId}</td>
+						<td>${car.brand}</td>
+						<td>${car.model}</td>
+						<td>${car.pricePrDay}</td>
+					`;
+                carTableBody.appendChild(carRow);
+            });
+        });
 </script>
 </body>
 </html>
+This code fetches the data from the /api/cars endpoint using the fetch function and then iterates over the returned array of cars, creating an HTML table row for each one and adding it to the table body.
+
+
+
+

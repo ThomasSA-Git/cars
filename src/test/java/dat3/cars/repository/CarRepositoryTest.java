@@ -22,9 +22,10 @@ class CarRepositoryTest {
   void setup() {
     if (!dataIsArranged) {
       List<Car> cars = List.of(
-          new Car("Ford", "Focus", 1250, 20),
-          new Car("Ford", "Fiesta", 1500, 20));
-      carRepository.saveAll(cars);
+          Car.builder().brand("Ford").model("Focus").pricePrDay(1250).bestDiscount(20).build(),
+          Car.builder().brand("Ford").model("Fiesta").pricePrDay(1500).bestDiscount(20).build()
+      );
+      carRepository.saveAllAndFlush(cars);
       dataIsArranged = true;
     }
   }
