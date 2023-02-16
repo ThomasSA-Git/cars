@@ -26,6 +26,11 @@ public class CarController {
   @GetMapping(path = "/{id}")
   CarResponse getCarById(@PathVariable int id){return carService.findCarById(id);}
 
+  //uge 3, opg 8.A
+  @GetMapping(path = "/{brand}/{model}")
+  List<CarResponse> getCarsByBrandAndModel(@PathVariable String brand, @PathVariable String model){return carService.findCarsByBrandAndModel(brand, model);}
+
+
   //ADMIN
   @PostMapping()
   CarResponse addCar(@RequestBody CarRequest body){

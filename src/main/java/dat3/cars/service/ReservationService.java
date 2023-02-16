@@ -69,6 +69,14 @@ public class ReservationService {
     }
   }
 
+  //uge 3 opg 8B
+  public List<ReservationResponse> getReservationsByMember(String username){
+    //Mangler en at throwe en exception
+    List<Reservation> reservations = reservationRepository.findByMember_username(username);
+    List<ReservationResponse> reservationResponses = reservations.stream().map(r -> new ReservationResponse(r)).toList();
+    return reservationResponses;
+  }
+
 /*  public ResponseEntity<Boolean> editReservation(ReservationRequest body, int id) {
     Reservation toEdit = reservationRepository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.BAD_REQUEST, "Reservation with this ID does not exist"));

@@ -74,4 +74,14 @@ public class CarService {
     carRepository.save(carToEdit);
     return ResponseEntity.ok(true);
   }
+
+  //uge 3, opg 8.A
+  public List<CarResponse> findCarsByBrandAndModel(String brand, String model){
+
+    List<Car> carList = carRepository.findCarsByBrandAndModel(brand, model);
+
+    List<CarResponse> carResponseList = carList.stream().map(c ->new CarResponse(c, true)).toList();
+
+    return  carResponseList;
+  }
 }

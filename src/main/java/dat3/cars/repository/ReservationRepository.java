@@ -13,10 +13,11 @@ import java.util.Optional;
 public interface ReservationRepository extends JpaRepository<Reservation, Integer> {
 
   Boolean existsByCarIdAndRentalDate(int carId, LocalDate rentalDate);
-/*
 
-  List<Reservation> findByUsername(String member_username);
-*/
+
+  //uge 3 opg 8B
+  List<Reservation> findByMember_username(String member_username);
+
 
   Optional<Reservation> findById(int i);
 }
