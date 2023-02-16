@@ -45,9 +45,9 @@ class ReservationServiceTest {
       List<Member> members = List.of(
           new Member("m1", "m1@a.dk", "test12", "bb", "Olsen", "xx vej 34", "Lyngby", "2800"),
           new Member("m2", "mm@a.dk", "pw", "bb", "bbb", "bbbb", "bbbb", "1234"));
-          List<Car> cars = List.of(
-              Car.builder().brand("Ford").model("Focus").pricePrDay(1250).bestDiscount(20).build(),
-              Car.builder().brand("Ford").model("Fiesta").pricePrDay(1500).bestDiscount(20).build());
+      List<Car> cars = List.of(
+          Car.builder().brand("Ford").model("Focus").pricePrDay(1250).bestDiscount(20).build(),
+          Car.builder().brand("Ford").model("Fiesta").pricePrDay(1500).bestDiscount(20).build());
 
       memberRepository.saveAllAndFlush(members);
       carRepository.saveAllAndFlush(cars);
@@ -87,4 +87,12 @@ class ReservationServiceTest {
     assertEquals("Focus", response.getModel());
     assertEquals("m1", response.getUsername());
   }
+
+  //Test af uge3 opgave 8B
+  @Test
+  void getReservationsByMember() {
+  List<Reservation> reservations = reservationRepository.findByMember_username("m1");
+  List<ReservationResponse> reservationResponses = reservations.stream().map(r -> new ReservationResponse(r)).toList();
+  assertEquals(1, reservationResponses.size());
+}
 }

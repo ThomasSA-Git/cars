@@ -105,6 +105,7 @@ public class MemberService {
     return new ResponseEntity<>(true, HttpStatus.OK);
   }
 
+  //uge 3 opg 8
   public int numberOfReservationsByMember(String username) {
     Member member = memberRepository.findById(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
     int numberOfReservations = member.getReservations().size();
