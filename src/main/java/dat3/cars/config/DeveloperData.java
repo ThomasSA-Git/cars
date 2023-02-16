@@ -111,24 +111,7 @@ public class DeveloperData implements ApplicationRunner {
    *****************************************************************************************/
   private void setupUserWithRoleUsers() {
 
-    System.out.println("******************************************************************************");
-    System.out.println("******* NEVER  COMMIT/PUSH CODE WITH DEFAULT CREDENTIALS FOR REAL ************");
-    System.out.println("******* REMOVE THIS BEFORE DEPLOYMENT, AND SETUP DEFAULT USERS DIRECTLY  *****");
-    System.out.println("**** ** ON YOUR REMOTE DATABASE                 ******************************");
-    System.out.println("******************************************************************************");
-    UserWithRoles user1 = new UserWithRoles("user1", passwordUsedByAll, "user1@a.dk");
-    UserWithRoles user2 = new UserWithRoles("user2", passwordUsedByAll, "user2@a.dk");
-    UserWithRoles user3 = new UserWithRoles("user3", passwordUsedByAll, "user3@a.dk");
-    UserWithRoles user4 = new UserWithRoles("user4", passwordUsedByAll, "user4@a.dk");
-    user1.addRole(Role.USER);
-    user1.addRole(Role.ADMIN);
-    user2.addRole(Role.USER);
-    user3.addRole(Role.ADMIN);
-    //No Role assigned to user4
-    userWithRolesRepository.save(user1);
-    userWithRolesRepository.save(user2);
-    userWithRolesRepository.save(user3);
-    userWithRolesRepository.save(user4);
+  //Fyld findes i anden branch
   }
 
 }
