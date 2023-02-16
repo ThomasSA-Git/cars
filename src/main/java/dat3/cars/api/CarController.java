@@ -22,6 +22,11 @@ public class CarController {
   @GetMapping
   List<CarResponse> getCars(){return carService.getCars(false);}
 
+  //ADMIN
+  @GetMapping("/avgPricePrDay")
+  Double getAvgPrcPrDay(){return carService.avgPricePrDay();}
+
+
   //ALL
   @GetMapping(path = "/{id}")
   CarResponse getCarById(@PathVariable int id){return carService.findCarById(id);}

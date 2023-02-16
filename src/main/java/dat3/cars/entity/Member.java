@@ -54,7 +54,7 @@ public class Member extends UserWithRoles {
 
   private int ranking;
 
-  @OneToMany
+  @OneToMany//(mappedBy = "member", cascade = CascadeType.ALL)
   private List<Reservation> reservations;
 
   @CreationTimestamp

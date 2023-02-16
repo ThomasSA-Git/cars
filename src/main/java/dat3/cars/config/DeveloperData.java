@@ -45,9 +45,9 @@ public class DeveloperData implements ApplicationRunner {
     Car car3 = new Car("Ford", "Mondeo", 1750, 20);*/
 
     List<Car> newCars = new ArrayList<>(Arrays.asList(
-        Car.builder().brand("Suzuki").model("Swift").pricePrDay(350).bestDiscount(6).build(),
-        Car.builder().brand("Kia").model("Optima").pricePrDay(450).bestDiscount(18).build(),
-        Car.builder().brand("WW").model("Wagon").pricePrDay(400).bestDiscount(20).build()));
+        Car.builder().brand("Ford").model("Focus").pricePrDay(1500).bestDiscount(10).build(),
+        Car.builder().brand("Ford").model("Fiesta").pricePrDay(1250).bestDiscount(15).build(),
+        Car.builder().brand("Ford").model("Mondeo").pricePrDay(1750).bestDiscount(20).build()));
     carRepository.saveAll(newCars);
 
 /*
@@ -96,7 +96,6 @@ public class DeveloperData implements ApplicationRunner {
     List<Reservation> reservationList = new ArrayList<>();
     reservationList.add(reservation1);
     reservationList.add(reservation2);
-
 
     setupUserWithRoleUsers();
 

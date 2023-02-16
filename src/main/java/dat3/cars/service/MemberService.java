@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +61,7 @@ public class MemberService {
     }
   }
 
-    public MemberResponse findMemberByUserId(String userName) {
+  public MemberResponse findMemberByUserId(String userName) {
     Member foundMember = memberRepository.findById(userName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
     //Member foundMember = memberRepository.findMemberByUserName(userName);
     return new MemberResponse(foundMember, true);
@@ -69,13 +70,13 @@ public class MemberService {
   public void updateRanking(String userName, int ranking) {
     Member updatedMember = memberRepository.findById(userName).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
 
-      updatedMember.setRanking(ranking);
-      memberRepository.save(updatedMember);
+    updatedMember.setRanking(ranking);
+    memberRepository.save(updatedMember);
   }
 
-  public ResponseEntity<Boolean> updateMember(MemberRequest body, String username){
+  public ResponseEntity<Boolean> updateMember(MemberRequest body, String username) {
     Member memberToEdit = memberRepository.findById(username).orElseThrow(() ->
-        new ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this ID does not exist"));
+        new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this ID does not exist"));
 
     //Member can not change his username (primary key), ranking, approved and timestamps
     memberToEdit.setEmail(body.getEmail());
@@ -89,9 +90,9 @@ public class MemberService {
     return new ResponseEntity<>(true, HttpStatus.OK);
   }
 
-  public ResponseEntity<Boolean> editMemberV2(MemberRequest body, String username){
+  public ResponseEntity<Boolean> editMemberV2(MemberRequest body, String username) {
     Member memberToEdit = memberRepository.findById(username).orElseThrow(() ->
-        new ResponseStatusException(HttpStatus.BAD_REQUEST,"Member with this ID does not exist"));
+        new ResponseStatusException(HttpStatus.BAD_REQUEST, "Member with this ID does not exist"));
 
     Optional.ofNullable(body.getEmail()).ifPresent(memberToEdit::setEmail);
     Optional.ofNullable(body.getPassword()).ifPresent(memberToEdit::setPassword);
@@ -102,6 +103,12 @@ public class MemberService {
     Optional.ofNullable(body.getCity()).ifPresent(memberToEdit::setCity);
     memberRepository.save(memberToEdit);
     return new ResponseEntity<>(true, HttpStatus.OK);
+  }
+
+  public int numberOfReservationsByMember(String username) {
+    Member member = memberRepository.findById(username).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Member with this ID does not exist"));
+    int numberOfReservations = member.getReservations().size();
+    return numberOfReservations;
   }
 
 }

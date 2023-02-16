@@ -1,5 +1,6 @@
 package dat3.cars.service;
 
+import dat3.cars.dto.MemberResponse;
 import dat3.cars.dto.ReservationRequest;
 import dat3.cars.dto.ReservationResponse;
 import dat3.cars.entity.Car;

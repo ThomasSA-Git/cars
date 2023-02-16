@@ -31,7 +31,7 @@ public class Car {
   @Column(name="max_discount")
   private int bestDiscount;
 
-  @OneToMany//(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany//(mappedBy = "car", cascade = CascadeType.ALL)
   private List<Reservation> reservation;
 
   @CreationTimestamp

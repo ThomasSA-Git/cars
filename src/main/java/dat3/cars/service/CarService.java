@@ -84,4 +84,14 @@ public class CarService {
 
     return  carResponseList;
   }
+
+  public double avgPricePrDay(){
+    List<Car> cars = carRepository.findAll();
+    double totalPricePrDay = 0;
+    for (Car c: cars) {
+      totalPricePrDay += c.getPricePrDay();
+    }
+    double avgPricePrday = totalPricePrDay / cars.size();
+    return avgPricePrday;
+  }
 }

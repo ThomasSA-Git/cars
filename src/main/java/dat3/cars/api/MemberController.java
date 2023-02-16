@@ -22,6 +22,10 @@ class MemberController {
   @GetMapping
   List<MemberResponse> getMembers(){ return memberService.getMembers(false);}
 
+  //ADMIN ONLY
+  @GetMapping("/reservations/{username}")
+  int getMembersWithReservation(@PathVariable String username){ return memberService.numberOfReservationsByMember(username);}
+
   //ADMIN
   @GetMapping(path = "/{username}")
   MemberResponse getMemberById(@PathVariable String username) throws Exception {return memberService.findMemberByUserId(username);}
