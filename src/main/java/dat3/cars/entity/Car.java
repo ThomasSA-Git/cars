@@ -32,7 +32,7 @@ public class Car {
   private int bestDiscount;
 
   @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
-  List<Reservation> reservation;
+  private List<Reservation> reservation;
 
   @CreationTimestamp
   private LocalDateTime created;

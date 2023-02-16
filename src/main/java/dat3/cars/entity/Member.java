@@ -58,7 +58,7 @@ public class Member extends UserWithRoles {
   private int ranking;
 
   @OneToMany
-  List<Reservation> reservations;
+  private List<Reservation> reservations;
 
   @CreationTimestamp
   private LocalDateTime created;

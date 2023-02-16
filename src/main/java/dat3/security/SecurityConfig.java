@@ -84,19 +84,13 @@ public class SecurityConfig {
             //Required in order to use the h2-console
             .requestMatchers("/h2*/**").permitAll()
 
-            .requestMatchers("/").permitAll() //Allow the default index.html file
+            .requestMatchers("/").permitAll() //Allow for a default index.html file
 
-            //Next two lines only required if you plan to do the cookie/session-demo from within this project
-            .requestMatchers("/session-demo.html").permitAll()
-            .requestMatchers("/api/cookie/**").permitAll()
-
-            //Allow anonymous access to this endpoint
-            //.requestMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll()
 
             //necessary to allow for "nice" JSON Errors
             .requestMatchers("/error").permitAll()
 
-            //.requestMatchers("/", "/**").permitAll()
+            //.requestMatchers("/", "/**").permitAll());
 
            // .requestMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll());
 

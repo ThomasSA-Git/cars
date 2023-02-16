@@ -12,15 +12,11 @@ import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Controller;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Controller
-@EnableJpaRepositories(basePackages = {"dat3.security.repository", "dat3.cars.repository"})
 public class DeveloperData implements ApplicationRunner {
 
   private CarRepository carRepository;
