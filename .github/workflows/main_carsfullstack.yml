@@ -9,11 +9,11 @@ on:
       - main
   workflow_dispatch:
 
-env:
-  JDBC_DATABASE_URL: ${{vars.DbUrl}}
-  JDBC_USERNAME: ${{vars.User}}
-  JDBC_PASSWORD: ${{secrets.dbPass}}
-  TOKEN_SECRET: ${{secrets.TOKEN_SECRET}}
+#env:
+  #JDBC_DATABASE_URL: ${{vars.DbUrl}}
+  #JDBC_USERNAME: ${{vars.User}}
+  #JDBC_PASSWORD: ${{secrets.dbPass}}
+  #TOKEN_SECRET: ${{secrets.TOKEN_SECRET}}
 
 jobs:
   build:
