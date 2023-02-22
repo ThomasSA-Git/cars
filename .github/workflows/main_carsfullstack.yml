@@ -10,8 +10,8 @@ on:
   workflow_dispatch:
 
 env:
-  JDBC_DATABASE_URL: ${{DbUrl}}
-  JDBC_USERNAME: ${{User}}
+  JDBC_DATABASE_URL: ${{DBURL}}
+  JDBC_USERNAME: ${{USER}}
   JDBC_PASSWORD: ${{DbPass}}
   TOKEN_SECRET: ${{TOKEN_SECRET}}
 
