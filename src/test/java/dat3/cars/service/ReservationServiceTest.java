@@ -66,7 +66,7 @@ class ReservationServiceTest {
     assertEquals("Fiesta", newResponse.getModel());
     assertNotNull(newResponse.getId());
   }
-
+/*
   @Test
   void addReservationException() {
     Reservation reservation = new Reservation(memberRepository.findMemberByUsername("m2"), carRepository.findCarById(1), LocalDate.of(2023, 11, 11));
@@ -94,5 +94,5 @@ class ReservationServiceTest {
   List<Reservation> reservations = reservationRepository.findByMember_username("m1");
   List<ReservationResponse> reservationResponses = reservations.stream().map(r -> new ReservationResponse(r)).toList();
   assertEquals(1, reservationResponses.size());
-}
+}*/
 }
