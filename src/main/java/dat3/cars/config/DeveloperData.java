@@ -12,10 +12,12 @@ import dat3.security.repository.UserWithRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
 import java.time.LocalDate;
 import java.util.*;
 
+@ComponentScan(basePackages = "dat3.security")
 @Controller
 public class DeveloperData implements ApplicationRunner {
 
