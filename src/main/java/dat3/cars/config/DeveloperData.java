@@ -49,7 +49,6 @@ public class DeveloperData implements ApplicationRunner {
         Car.builder().brand("Ford").model("Fiesta").pricePrDay(1250).bestDiscount(15).build(),
         Car.builder().brand("Ford").model("Mondeo").pricePrDay(1750).bestDiscount(20).build()));
     carRepository.saveAll(newCars);
-
 /*
 
     List<Car> carEntities = new ArrayList<>();
