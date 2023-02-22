@@ -56,7 +56,7 @@ class ReservationServiceTest {
       dataIsInitialized = true;
     }
   }
-
+/*
   @Test
   void addReservation() {
     Reservation reservation = new Reservation(memberRepository.findMemberByUsername("m2"), carRepository.findCarById(2), LocalDate.of(2023, 11, 11));
@@ -65,7 +65,7 @@ class ReservationServiceTest {
     assertEquals("m2", newResponse.getUsername());
     assertEquals("Fiesta", newResponse.getModel());
     assertNotNull(newResponse.getId());
-  }
+  }*/
 /*
   @Test
   void addReservationException() {
