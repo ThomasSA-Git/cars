@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CarService {
@@ -67,10 +68,17 @@ public class CarService {
     Car carToEdit = carRepository.findById(id).orElseThrow(() ->
         new ResponseStatusException(HttpStatus.BAD_REQUEST, "Car with this ID does not exist"));
     //ID can not be changed
+/*
     carToEdit.setBrand(body.getBrand());
     carToEdit.setModel(body.getModel());
     carToEdit.setPricePrDay(body.getPricePrDay());
     carToEdit.setBestDiscount(body.getBestDiscount());
+*/
+//v2 below
+    Optional.ofNullable(body.getBrand()).ifPresent(carToEdit::setBrand);
+    Optional.ofNullable(body.getModel()).ifPresent(carToEdit::setModel);
+    Optional.ofNullable(body.getPricePrDay()).ifPresent(carToEdit::setPricePrDay);
+    Optional.ofNullable(body.getBestDiscount()).ifPresent(carToEdit::setBestDiscount);
     carRepository.save(carToEdit);
     return ResponseEntity.ok(true);
   }
