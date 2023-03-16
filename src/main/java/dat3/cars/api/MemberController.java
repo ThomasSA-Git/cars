@@ -4,6 +4,7 @@ import dat3.cars.dto.MemberRequest;
 import dat3.cars.dto.MemberResponse;
 import dat3.cars.service.MemberService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -19,7 +20,7 @@ class MemberController {
     this.memberService = memberService;
   }
 
-  //ADMIN ONLY
+  @PreAuthorize("hasAuthority('ADMIN')")
   @GetMapping
   List<MemberResponse> getMembers(){ return memberService.getMembers(false);}
 

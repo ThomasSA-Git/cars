@@ -89,15 +89,15 @@ public class SecurityConfig {
 
             //necessary to allow for "nice" JSON Errors
             .requestMatchers("/error").permitAll()
-//udkommenter nedenstående
-            .requestMatchers("/", "/**").permitAll());
+    //udkommenter nedenstående
+            //.requestMatchers("/", "/**").permitAll());
 
            // .requestMatchers(HttpMethod.GET,"/api/demo/anonymous").permitAll());
 
            // Demonstrates another way to add roles to an endpoint
-           // .requestMatchers(HttpMethod.GET, "/api/demo/admin").hasAuthority("ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/cars").hasAuthority("ADMIN")
     //afkommenter nedenstående
-    //.anyRequest().authenticated());
+    .anyRequest().authenticated());
 
     return http.build();
   }

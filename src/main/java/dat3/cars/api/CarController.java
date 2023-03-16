@@ -29,6 +29,7 @@ public class CarController {
 
 
   //ALL
+  @CrossOrigin
   @GetMapping(path = "/{id}")
   CarResponse getCarById(@PathVariable int id){return carService.findCarById(id);}
 
