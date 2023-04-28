@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'Carappproject'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F74AC5A9232F4E4783A3E19D9E47F74E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A2D532F7E47740F2A6A5374DB0C76F8C }}
           package: '*.jar'
